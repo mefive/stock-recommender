@@ -4,7 +4,6 @@
     "target": "es2015",
     "noImplicitAny": false,
     "sourceMap": true,
-    "watch": true,
     "outDir": "bin"
   },
   "lib": [
