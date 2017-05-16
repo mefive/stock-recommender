@@ -2,7 +2,7 @@ class Position {
   private _symbol: string;
 
   get value(): number {
-    return this.price * this.amount;
+    return +(this.price * this.amount).toFixed(3);
   }
 
   public price: number;

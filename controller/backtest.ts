@@ -7,10 +7,11 @@ import findLast = require('lodash/findLast');
 
 const router = express.Router();
 
-router.get('/backtest', async function (req, res, next) {
+router.get('/api/backtest', async function (req, res, next) {
   const { symbol, datalen = 100, scale = 240  } = req.query;
 
   const reverse = !!(+req.query.reverse);
+  const trades = [];
 
   try {
     if (!symbol) {
@@ -32,6 +33,12 @@ router.get('/backtest', async function (req, res, next) {
         const order = trader.orders.slice(-1)[0];
         const { portfolio } = trader;
 
+        trades.push({ order: order.valueOf(), portfolio: portfolio.valueOf() });
+
+        if (date === '2017-04-12') {
+          console.log(portfolio.returns)
+        }
+
         console.log(
           `${date}
 买入 价格：${order.price} 数量：${order.amount} 支出：${order.cost.toFixed(3)}
@@ -44,6 +51,8 @@ router.get('/backtest', async function (req, res, next) {
         const order = trader.orders.slice(-1)[0];
         const { portfolio } = trader;
 
+        trades.push({ order: order.valueOf(), portfolio: portfolio.valueOf() });
+
         console.log(
           `${date}
 卖出 价格：${order.price} 数量：${order.amount} 支出：${order.cost.toFixed(3)}
@@ -55,6 +64,8 @@ router.get('/backtest', async function (req, res, next) {
       (symbol, date) => {
         const order = trader.orders.slice(-1)[0];
         const { portfolio } = trader;
+
+        trades.push({ order: order.valueOf(), portfolio: portfolio.valueOf() });
 
         console.log(
           `${date}
@@ -103,7 +114,14 @@ router.get('/backtest', async function (req, res, next) {
 
     console.log(`仓位 总资产：${portfolio.asset.toFixed(3)} 现金：${portfolio.cash.toFixed(3)} 总收益：${percentString(portfolio.returns)}`)
 
-    res.json({ code: 0, data });
+    res.json({
+      code: 0,
+      data: {
+        kline: data,
+        trades,
+        portfolio: portfolio.valueOf(),
+      }
+    });
   }
   catch (e) {
     next(e);

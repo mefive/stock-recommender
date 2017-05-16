@@ -49,16 +49,16 @@ class Order {
 
     fee = fee + money * 0.0006; // 招商证券佣金万6
 
-    return fee;
+    return +fee.toFixed(3);
   }
 
   get money(): number {
-    return this._price * this._amount;
+    return +(this._price * this._amount).toFixed(3);
   }
 
   get cost(): number {
     if (this._type === OrderType.buy) {
-      return this.money + this.fee;
+      return +(this.money + this.fee).toFixed(3);
     }
 
     return 0;
@@ -66,7 +66,7 @@ class Order {
 
   get earnings(): number {
     if (this._type === OrderType.sell) {
-      return this.money - this.fee;
+      return +(this.money - this.fee).toFixed(3);
     }
 
     return 0;

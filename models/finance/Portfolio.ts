@@ -14,26 +14,26 @@ class Portfolio {
 
     Object.keys(this._positions).map((key) => {
       const position = this._positions[key];
-      total += (position.amount * position.price);
+      total += position.value;
     });
 
     return total;
   }
 
   get returns(): number {
-    return (this.asset - this._startingCash) / this._startingCash;
+    return +((this.asset - this._startingCash) / this._startingCash).toFixed(5);
   }
 
   public buy(symbol: string, amount: number, cost: number) {
     const position: Position = this.getPosition(symbol);
-    position.amount += amount;
-    this._cash -= cost; 
+    position.amount = position.amount + amount;
+    this._cash = +(this._cash - cost).toFixed(3); 
   }
 
   public sell(symbol: string, amount: number, earnings: number) {
     const position: Position = this.getPosition(symbol);
     position.amount -= amount;
-    this._cash += earnings;
+    this._cash = +(this._cash + earnings).toFixed(3);
   }
 
   public tick(symbol: string, price: number) {
