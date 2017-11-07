@@ -87,7 +87,7 @@ class Order {
     symbol: string,
     price: number,
     amount: number,
-    date: string
+    date: string,
    ) {
     this._type = type;
     this._symbol = symbol;

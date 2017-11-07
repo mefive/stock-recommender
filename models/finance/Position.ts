@@ -1,4 +1,8 @@
+/**
+ * Position class
+ */
 class Position {
+  public readonly foo: string = 'some';
   private _symbol: string;
 
   get value(): number {
@@ -12,6 +16,7 @@ class Position {
     this._symbol = symbol;
     this.price = price || 0;
     this.amount = amount || 0;
+    this.foo = '1';
   }
 }
 

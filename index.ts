@@ -1,12 +1,12 @@
-import express = require('express');
-import backtestController from './controller/backtest';
+import * as express from 'express';
+import backtest from './controller/backtest';
 
 const PORT = 7777;
 
 function start() {
   const app = express();
 
-  app.use(backtestController);
+  app.use(backtest);
 
   app.use((err, req, res, next) => {
     console.log(err);

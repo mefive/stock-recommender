@@ -7,7 +7,7 @@ import findLast = require('lodash/findLast');
 
 const router = express.Router();
 
-router.get('/api/backtest', async function (req, res, next) {
+router.get('/api/backtest', async (req, res, next) => {
   const { symbol, datalen = 100, scale = 240  } = req.query;
 
   const reverse = !!(+req.query.reverse);
@@ -24,7 +24,7 @@ router.get('/api/backtest', async function (req, res, next) {
         symbol,
         scale,
         datalen,
-      }
+      },
     );
 
     const trader: Trader = new Trader(
@@ -36,7 +36,7 @@ router.get('/api/backtest', async function (req, res, next) {
         trades.push({ order: order.valueOf(), portfolio: portfolio.valueOf() });
 
         if (date === '2017-04-12') {
-          console.log(portfolio.returns)
+          console.log(portfolio.returns);
         }
 
         console.log(
