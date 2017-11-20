@@ -18,7 +18,8 @@
     "express-async-wrap": "^1.0.0",
     "isomorphic-fetch": "^2.2.1",
     "json5": "^0.5.1",
-    "lodash": "^4.17.4"
+    "lodash": "^4.17.4",
+    "moment": "^2.19.1"
   },
   "devDependencies": {
     "tsc": "^1.20150623.0",
